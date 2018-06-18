@@ -1,0 +1,51 @@
+Data storage, data viewing, and simple analysis directory.
+This is the n=151x2 sanctioned lie (1st) deception dataset.
+
+nbviewers/
+  SimpleStats.ipynb  
+  SimpleStats_TvsB.ipynb
+  SimpleStats_Cluster.ipynb  
+
+
+scripts/
+  clean.py  - remove OpenFace files with no corresponding transcript file
+      input:  data/OpenFace/*.csv
+      output: data/transcripts/*.csv
+
+  createcsv.py - 
+      input:
+        data/OpenFace/*.csv
+        data/list.csv
+      output:
+        data/openface_data.pkl.xz
+
+  addclustercol.py - adds cluster column
+      input:
+        data/face_clusters.csv
+        data/openface_data.pkl.xz
+      output:
+        data/openface_data_wclustercol.pkl.xz
+
+ 
+  makeclusterdist.py - calc cluster distributions over files, put in csv
+      input: data/all_frames_wclust.pkl.xz
+      output: 
+        data/cluster_dist_s2_w.csv
+        data/cluster_dist_s2_w_i.csv
+
+  compare.py - module for doing mwu test, ttest, and cohen's d nicely
+  ml_core.py - performs classification with KNN, logistic, tree; w dev
+
+
+data/
+  all_frames.pkl.xz - Filename,filetype,conf, timestamp, all AUs: no landmark
+  test.pkl.xz       - subset of all_frames.pkl.xz for testing 
+  all_frames_wclust.pkl.xz - a AU6_AU12 cluster col has been added
+
+  cluster distribution files:
+    cluster_dist_s2_w.csv   - witness only 
+    cluster_dist_s2_w_i.csv - witness and interrogator
+  
+  raw data directories:
+    transcripts/    - transcript and turn length
+    OpenFace/       - full OpenFace/ file dir - NOTE: not stored in git repo
